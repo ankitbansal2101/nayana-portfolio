@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nayana Swami — Yoga Instructor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #6b7c5c;
+    --sage-light: #8fa07a;
+    --sage-dark: #3d4a30;
+    --cream: #f5f0e8;
+    --warm-white: #faf8f3;
+    --clay: #c4a882;
+    --clay-dark: #9e7f5a;
+    --charcoal: #2a2a25;
+    --muted: #7a7a72;
+    --accent-green: #4a6741;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(107,124,92,0.12);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--sage); }
+
+  .nav-cta {
+    background: var(--sage-dark);
+    color: #fff !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    transition: background 0.25s !important;
+  }
+  .nav-cta:hover { background: var(--sage) !important; color: #fff !important; }
+
+  /* ─── HERO ────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,124,92,0.07) 0%, transparent 70%);
+  }
+  .hero-bg-circle.c1 { width: 700px; height: 700px; top: -150px; right: -100px; }
+  .hero-bg-circle.c2 { width: 400px; height: 400px; bottom: 50px; left: -100px; }
+
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 4rem 6rem;
+    position: relative; z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 32px; height: 1px;
+    background: var(--sage);
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--charcoal);
+    margin-bottom: 0.4rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--clay-dark);
+    margin-bottom: 2rem;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--sage-dark);
+    color: #fff;
+    padding: 0.9rem 2.2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+
+  .btn-whatsapp {
+    background: #25d366;
+    color: #fff;
+    padding: 0.9rem 2.2rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: all 0.3s;
+  }
+  .btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-1px); }
+
+  .hero-contact {
+    display: flex; gap: 2rem; margin-top: 2.5rem;
+    font-size: 0.85rem; color: var(--muted);
+  }
+  .hero-contact a { color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
+  .hero-contact a:hover { color: var(--sage); }
+
+  .hero-image-side {
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .hero-image-frame {
+    width: 75%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(145deg, var(--sage) 0%, var(--sage-dark) 100%);
+    border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(61,74,48,0.25);
+    animation: morphBlob 8s ease-in-out infinite;
+  }
+
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    display: block;
+  }
+
+  @keyframes morphBlob {
+    0%, 100% { border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%; }
+    25% { border-radius: 45% 55% 40% 60% / 60% 50% 50% 40%; }
+    50% { border-radius: 55% 45% 60% 40% / 45% 55% 45% 55%; }
+    75% { border-radius: 40% 60% 45% 55% / 55% 40% 60% 45%; }
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 15%;
+    left: 8%;
+    background: #fff;
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    display: flex; align-items: center; gap: 0.8rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .hero-badge-icon { font-size: 1.8rem; }
+  .hero-badge-text { font-size: 0.75rem; }
+  .hero-badge-text strong { display: block; font-weight: 600; color: var(--charcoal); }
+  .hero-badge-text span { color: var(--muted); font-size: 0.7rem; }
+
+  /* ─── SECTION BASE ───────────────────────────── */
+  section { padding: 7rem 6rem; }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--sage); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--charcoal);
+  }
+  .section-title em { font-style: italic; color: var(--sage); }
+
+  /* ─── ABOUT ──────────────────────────────────── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    background: var(--warm-white);
+    padding: 7rem 6rem;
+  }
+
+  .about-text-col {}
+
+  .about-desc {
+    font-size: 0.96rem;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-top: 1.5rem;
+  }
+  .about-desc + .about-desc { margin-top: 1rem; }
+
+  .creds-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .cred-card {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 1.2rem 1.4rem;
+    border-left: 3px solid var(--sage);
+  }
+  .cred-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--charcoal); line-height: 1.3; }
+  .cred-card p { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .lang-tags { display: flex; gap: 0.6rem; margin-top: 2rem; flex-wrap: wrap; }
+  .lang-tag {
+    background: transparent;
+    border: 1px solid var(--sage-light);
+    color: var(--sage-dark);
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .about-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .about-shape {
+    width: 380px; height: 460px;
+    background: linear-gradient(160deg, var(--cream) 0%, rgba(107,124,92,0.12) 100%);
+    border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
+    border: 1px solid rgba(107,124,92,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative;
+  }
+
+  .stats-float {
+    position: absolute;
+    right: -20px;
+    top: 20%;
+    display: flex; flex-direction: column; gap: 0.8rem;
+  }
+
+  .stat-pill {
+    background: #fff;
+    border-radius: 6px;
+    padding: 0.8rem 1.2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    min-width: 110px;
+  }
+  .stat-pill strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--sage-dark); }
+  .stat-pill span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ─── SERVICES ───────────────────────────────── */
+  #services {
+    background: var(--cream);
+  }
+
+  .services-header { text-align: center; margin-bottom: 4rem; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--warm-white);
+    border-radius: 6px;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(107,124,92,0.1);
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), var(--clay));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(61,74,48,0.1); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    background: var(--cream);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--charcoal); margin-bottom: 1rem; }
+  .service-card ul { list-style: none; }
+  .service-card ul li {
+    font-size: 0.875rem;
+    color: var(--muted);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(107,124,92,0.08);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .service-card ul li:last-child { border-bottom: none; }
+  .service-card ul li::before { content: '—'; color: var(--sage-light); font-size: 0.7rem; }
+
+  /* ─── BENEFITS ───────────────────────────────── */
+  #benefits { background: var(--warm-white); }
+
+  .benefits-header { text-align: center; margin-bottom: 4rem; }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(107,124,92,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .benefit-item {
+    background: var(--warm-white);
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .benefit-item:hover { background: var(--cream); }
+
+  .benefit-emoji { font-size: 2rem; margin-bottom: 1.2rem; }
+  .benefit-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; }
+  .benefit-item p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* ─── CORPORATE ──────────────────────────────── */
+  #corporate { background: var(--sage-dark); color: #fff; }
+
+  .corporate-header { text-align: center; margin-bottom: 1rem; }
+  .corporate-header .section-eyebrow { justify-content: center; color: var(--clay); }
+  .corporate-header .section-eyebrow::before { background: var(--clay); }
+  .corporate-header .section-title { color: #fff; }
+
+  .ideal-banner {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 2rem auto 4rem;
+  }
+
+  .corporate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+  }
+
+  .corp-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 2rem 1.8rem;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .corp-card:hover { background: rgba(255,255,255,0.1); }
+
+  .corp-card .corp-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .corp-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: #fff; font-weight: 600; margin-bottom: 0.5rem; }
+  .corp-card p { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+  .trusted-line {
+    text-align: center;
+    font-size: 0.84rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2rem;
+  }
+  .trusted-line strong { color: rgba(255,255,255,0.8); }
+
+  /* ─── BOOKING ────────────────────────────────── */
+  #booking { background: var(--cream); }
+
+  .booking-header { text-align: center; margin-bottom: 3rem; }
+  .booking-header .section-eyebrow { justify-content: center; }
+
+  .booking-form-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    padding: 3rem;
+    box-shadow: 0 10px 60px rgba(0,0,0,0.07);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+
+  .form-group {
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-group label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 1px solid rgba(107,124,92,0.2);
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    background: var(--warm-white);
+    outline: none;
+    transition: border-color 0.25s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--sage); background: #fff; }
+
+  .form-group textarea { resize: vertical; min-height: 110px; }
+
+  .form-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--sage-dark);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.3s;
+  }
+  .btn-submit:hover { background: var(--sage); transform: translateY(-1px); }
+
+  /* ─── FOOTER ─────────────────────────────────── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.55);
+    padding: 4rem 6rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-brand .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; max-width: 260px; }
+
+  .footer-col h5 {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.25s;
+  }
+  .footer-col ul li a:hover { color: var(--clay); }
+
+  .footer-contact-item {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+    display: flex; align-items: flex-start; gap: 0.5rem;
+  }
+  .footer-contact-item a { color: rgba(255,255,255,0.45); text-decoration: none; }
+  .footer-contact-item a:hover { color: var(--clay); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+    font-size: 0.8rem;
+  }
+
+  /* ─── FADE-IN ANIMATION ──────────────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-text { padding: 7rem 1.5rem 3rem; }
+    .hero-image-side { height: 300px; }
+    section, #about, footer { padding: 4rem 1.5rem; }
+    .services-grid, .benefits-grid, .corporate-grid, .footer-grid { grid-template-columns: 1fr; }
+    #about { grid-template-columns: 1fr; }
+    .about-visual { display: none; }
+    .creds-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .booking-form-wrap { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Nayana Swami</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#corporate">Corporate</a></li>
+    <li><a href="#booking" class="nav-cta">Book a Session</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+
+  <div class="hero-text fade-up">
+    <span class="hero-eyebrow">Certified Yoga Instructor</span>
+    <h1 class="hero-name">Nayana<br><em>Swami</em></h1>
+    <p class="hero-tagline">Transform Your Workplace Wellness</p>
+    <p class="hero-desc">Certified Yoga Instructor specializing in corporate wellness, stress management, and therapeutic yoga for professionals.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Book a Session</a>
+      <a href="https://wa.me/918097093687" class="btn-whatsapp" target="_blank">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <div class="hero-contact">
+      <a href="tel:+918097093687">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.52 9.81a19.79 19.79 0 01-3.07-8.65A2 2 0 012.42 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.4a16 16 0 006.72 6.72l1.77-1.77a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        8097093687
+      </a>
+      <a href="mailto:yogwithnaina@gmail.com">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        yogwithnaina@gmail.com
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-image-side">
+    <div class="hero-image-frame">
+      <img class="hero-photo" src="hero-photo.png" alt="Nayana Swami">
+    </div>
+    <div class="hero-badge">
+      <span class="hero-badge-icon">🏅</span>
+      <div class="hero-badge-text">
+        <strong>Since 2021</strong>
+        <span>Corporate Wellness</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text-col fade-up">
+    <span class="section-eyebrow">My Story</span>
+    <h2 class="section-title">About <em>Nayana</em></h2>
+    <p class="about-desc">Certified Yoga Instructor with a strong foundation in traditional yoga and modern corporate wellness. Since 2021, I specialize in posture correction, breathwork (Pranayama), stress management, and mindfulness practices for professionals.</p>
+    <p class="about-desc">With experience in the corporate sector, I understand workplace stress firsthand. My mission is to help individuals build strength, resilience, emotional balance, and sustainable well-being through authentic yoga.</p>
+
+    <div class="creds-grid">
+      <div class="cred-card">
+        <h4>Registered Yoga Teacher</h4>
+        <p>Yoga Alliance School</p>
+      </div>
+      <div class="cred-card">
+        <h4>Diploma in Yoga Advanced</h4>
+        <p>Premanand Yoga Institute</p>
+      </div>
+      <div class="cred-card">
+        <h4>Certified Yoga Healing Coach</h4>
+        <p>Certification</p>
+      </div>
+      <div class="cred-card">
+        <h4>Stress Management Coach</h4>
+        <p>Certification</p>
+      </div>
+    </div>
+
+    <div class="lang-tags">
+      <span class="lang-tag">Hindi</span>
+      <span class="lang-tag">Marathi</span>
+      <span class="lang-tag">English</span>
+    </div>
+  </div>
+
+  <div class="about-visual fade-up">
+    <div class="about-shape">🌿</div>
+    <div class="stats-float">
+      <div class="stat-pill">
+        <strong>3+</strong>
+        <span>Years</span>
+      </div>
+      <div class="stat-pill">
+        <strong>500+</strong>
+        <span>Students</span>
+      </div>
+      <div class="stat-pill">
+        <strong>15+</strong>
+        <span>Companies</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header fade-up">
+    <span class="section-eyebrow">What I Offer</span>
+    <h2 class="section-title">My <em>Services</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon">🏢</div>
+      <h3>Corporate Yoga Programs</h3>
+      <ul>
+        <li>Desk Yoga Sessions</li>
+        <li>Posture Correction</li>
+        <li>Breathing Techniques</li>
+        <li>Team Wellness</li>
+      </ul>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">🧘</div>
+      <h3>Personal Yoga Sessions</h3>
+      <ul>
+        <li>Customized Programs</li>
+        <li>Flexibility Training</li>
+        <li>Pain Management</li>
+        <li>Progress Tracking</li>
+      </ul>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">✨</div>
+      <h3>Stress Management</h3>
+      <ul>
+        <li>Meditation</li>
+        <li>Pranayama</li>
+        <li>Mindfulness</li>
+        <li>Emotional Balance</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <div class="benefits-header fade-up">
+    <span class="section-eyebrow">Why It Works</span>
+    <h2 class="section-title">Key <em>Benefits</em></h2>
+  </div>
+  <div class="benefits-grid fade-up">
+    <div class="benefit-item">
+      <div class="benefit-emoji">🫀</div>
+      <h4>Posture Correction</h4>
+      <p>Reduce back & neck pain from long desk hours</p>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-emoji">🧠</div>
+      <h4>Mental Clarity</h4>
+      <p>Better focus & concentration at work</p>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-emoji">⚡</div>
+      <h4>Increased Energy</h4>
+      <p>Combat fatigue naturally throughout the day</p>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-emoji">🛡️</div>
+      <h4>Stress Relief</h4>
+      <p>Manage workplace stress effectively</p>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-emoji">😴</div>
+      <h4>Better Sleep</h4>
+      <p>Improve rest patterns and sleep quality</p>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-emoji">📈</div>
+      <h4>Productivity</h4>
+      <p>Boost work performance through wellness</p>
+    </div>
+  </div>
+</section>
+
+<!-- CORPORATE -->
+<section id="corporate">
+  <div class="corporate-header fade-up">
+    <span class="section-eyebrow">For Organizations</span>
+    <h2 class="section-title">Corporate <em>Wellness</em></h2>
+  </div>
+
+  <div class="ideal-banner fade-up">
+    Perfect for professionals experiencing long desk hours, neck/back pain, high stress, poor posture, sleep issues, or seeking better work-life balance.
+  </div>
+
+  <div class="corporate-grid fade-up">
+    <div class="corp-card">
+      <div class="corp-icon">⏱️</div>
+      <h4>Desk Yoga</h4>
+      <p>30–45 min sessions at workstations</p>
+    </div>
+    <div class="corp-card">
+      <div class="corp-icon">👥</div>
+      <h4>Team Workshops</h4>
+      <p>1–2 hour interactive sessions</p>
+    </div>
+    <div class="corp-card">
+      <div class="corp-icon">🎯</div>
+      <h4>Custom Programs</h4>
+      <p>Tailored to your organization's needs</p>
+    </div>
+  </div>
+
+  <p class="trusted-line">Trusted by <strong>CDSL, CNK, FLS Group</strong>, NGOs, and private organizations across Mumbai and Maharashtra.</p>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-header fade-up">
+    <span class="section-eyebrow">Get Started</span>
+    <h2 class="section-title">Book Your <em>Session</em></h2>
+    <p style="color:var(--muted);margin-top:0.8rem;font-size:0.9rem;">Fill out the form and I'll get back to you within 24 hours.</p>
+  </div>
+
+  <div class="booking-form-wrap fade-up">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Enter your full name">
+      </div>
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" placeholder="your.email@example.com">
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" placeholder="+91 XXXXX XXXXX">
+      </div>
+      <div class="form-group">
+        <label>Service Type *</label>
+        <select>
+          <option>Corporate Yoga Program</option>
+          <option>Personal Yoga Sessions</option>
+          <option>Stress Management</option>
+          <option>Team Workshop</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Organization Name</label>
+        <input type="text" placeholder="For corporate bookings">
+      </div>
+      <div class="form-group">
+        <label>Preferred Date</label>
+        <input type="date">
+      </div>
+      <div class="form-group full">
+        <label>Additional Details</label>
+        <textarea placeholder="Tell me about your specific needs, any health concerns, or questions you may have..."></textarea>
+      </div>
+    </div>
+    <button class="btn-submit" onclick="handleSubmit(this)">Submit Booking Request</button>
+    <p class="form-note">By submitting this form, you agree to be contacted regarding your yoga session inquiry.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo">Nayana Swami</span>
+      <p>Certified Yoga Instructor dedicated to helping professionals achieve wellness, balance, and stress-free living through authentic yoga practices.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#corporate">Corporate Wellness</a></li>
+        <li><a href="#booking">Book Session</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <div class="footer-contact-item">📞 <a href="tel:+918097093687">+91 8097093687</a></div>
+      <div class="footer-contact-item">✉️ <a href="mailto:yogwithnaina@gmail.com">yogwithnaina@gmail.com</a></div>
+      <div class="footer-contact-item">📍 Mumbai, Maharashtra</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>♡ 2026 Nayana Swami — Certified Yoga Instructor. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(btn) {
+    btn.textContent = '✓ Request Sent!';
+    btn.style.background = '#4a6741';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
