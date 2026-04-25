@@ -269,8 +269,6 @@
     padding: 7rem 6rem;
   }
 
-  .about-text-col {}
-
   .about-desc {
     font-size: 0.96rem;
     line-height: 1.85;
@@ -872,22 +870,23 @@
   </div>
 
   <div class="booking-form-wrap fade-up">
+    <form id="booking-form">
     <div class="form-grid">
       <div class="form-group">
         <label>Full Name *</label>
-        <input type="text" placeholder="Enter your full name">
+        <input type="text" name="fullName" placeholder="Enter your full name" required>
       </div>
       <div class="form-group">
         <label>Email Address *</label>
-        <input type="email" placeholder="your.email@example.com">
+        <input type="email" name="email" placeholder="your.email@example.com" required>
       </div>
       <div class="form-group">
         <label>Phone Number *</label>
-        <input type="tel" placeholder="+91 XXXXX XXXXX">
+        <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
       </div>
       <div class="form-group">
         <label>Service Type *</label>
-        <select>
+        <select name="serviceType" required>
           <option>Corporate Yoga Program</option>
           <option>Personal Yoga Sessions</option>
           <option>Stress Management</option>
@@ -896,19 +895,21 @@
       </div>
       <div class="form-group">
         <label>Organization Name</label>
-        <input type="text" placeholder="For corporate bookings">
+        <input type="text" name="organizationName" placeholder="For corporate bookings">
       </div>
       <div class="form-group">
         <label>Preferred Date</label>
-        <input type="date">
+        <input type="date" name="preferredDate">
       </div>
       <div class="form-group full">
         <label>Additional Details</label>
-        <textarea placeholder="Tell me about your specific needs, any health concerns, or questions you may have..."></textarea>
+        <textarea name="details" placeholder="Tell me about your specific needs, any health concerns, or questions you may have..."></textarea>
       </div>
     </div>
-    <button class="btn-submit" onclick="handleSubmit(this)">Submit Booking Request</button>
+    <button class="btn-submit" type="submit">Submit Booking Request</button>
+    <p class="form-note" id="form-status" style="margin-top:0.8rem; color: var(--sage-dark); display:none;"></p>
     <p class="form-note">By submitting this form, you agree to be contacted regarding your yoga session inquiry.</p>
+    </form>
   </div>
 </section>
 
@@ -954,12 +955,57 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Form submit
-  function handleSubmit(btn) {
-    btn.textContent = '✓ Request Sent!';
-    btn.style.background = '#4a6741';
-    btn.disabled = true;
-  }
+  // Booking form -> Google Sheets (via Apps Script Web App)
+  const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxu7Rie9ywOQe0KG5kZRTKzLxrPlCExDTpSsoryj5nMvnVz5H1HWNCUoS3z44NCJygE0Q/exec';
+  const bookingForm = document.getElementById('booking-form');
+  const bookingSubmitBtn = bookingForm.querySelector('button[type="submit"]');
+  const bookingStatus = document.getElementById('form-status');
+
+  bookingForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (GOOGLE_SHEETS_WEB_APP_URL.includes('PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE')) {
+      bookingStatus.textContent = 'Add your Google Apps Script Web App URL first (not the sheet edit URL).';
+      bookingStatus.style.display = 'block';
+      bookingStatus.style.color = '#b42318';
+      return;
+    }
+
+    const formValues = Object.fromEntries(new FormData(bookingForm).entries());
+    const payload = {
+      'Full name': formValues.fullName || '',
+      'Email address': formValues.email || '',
+      'phone number': formValues.phone || '',
+      'service type': formValues.serviceType || '',
+      'org name': formValues.organizationName || '',
+      'preferred date': formValues.preferredDate || '',
+      'additional info': formValues.details || ''
+    };
+
+    bookingSubmitBtn.disabled = true;
+    bookingSubmitBtn.textContent = 'Sending...';
+    bookingStatus.style.display = 'none';
+
+    try {
+      await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+
+      bookingStatus.textContent = '✓ Request sent successfully.';
+      bookingStatus.style.color = '#2e7d32';
+      bookingStatus.style.display = 'block';
+      bookingForm.reset();
+      bookingSubmitBtn.textContent = '✓ Request Sent!';
+    } catch (error) {
+      bookingStatus.textContent = 'Could not submit right now. Please try again.';
+      bookingStatus.style.color = '#b42318';
+      bookingStatus.style.display = 'block';
+      bookingSubmitBtn.textContent = 'Submit Booking Request';
+      bookingSubmitBtn.disabled = false;
+    }
+  });
 </script>
 </body>
 </html>
